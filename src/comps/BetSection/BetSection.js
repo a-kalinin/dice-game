@@ -10,10 +10,18 @@ class BetSection extends Component {
         this.handleFormSubmitClick = this.handleFormSubmitClick.bind(this);
     }
 
+    /**
+     * Handler for making bet
+     * @param {String} value - type of bet, allowed "hi" and "lo"
+     */
     handleFormSubmitClick(value){
         this.props.onBetMake && this.props.onBetMake(value);
     }
 
+    /**
+     * handler for user's bet's amount change
+     * @param {Event} event - user's input event
+     */
     handleAmountChange(event){
         let amount = Number(event.target.value || 0);
         if(event.target.value.indexOf('.') >=0 || event.target.value.indexOf(',') >=0 ){
@@ -25,6 +33,10 @@ class BetSection extends Component {
         }
     }
 
+    /**
+     * handler for user's bet's number change
+     * @param {Event} event - user's input event
+     */
     handleNumberChange(event){
         let number = Number(event.target.value || 0);
         if(isNaN(number)){

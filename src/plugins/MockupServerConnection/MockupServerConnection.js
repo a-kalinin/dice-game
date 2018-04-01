@@ -1,5 +1,6 @@
 import { sha256 } from 'js-sha256';
 
+// getting private property name
 const resultPropName = Symbol();
 
 class MockupServerConnection {
@@ -11,15 +12,23 @@ class MockupServerConnection {
         this.resultHash = null;
     }
 
+    /**
+     * Starts new game, reset all the game attributes, such as number, hash
+     * @return {Promise<String>} - resolve function will get new number's hash
+     */
     startNewGame(){
         const result = this.getResult();
         this[resultPropName] = result;
-        this.resultHash = sha256(result.string);
+        this.resultHash = sha256(result.salted);
         return new Promise(function(resolve, reject){
             setTimeout( hash => resolve(hash), 100, this.resultHash ); // mockup delay for API call
         }.bind(this));
     }
 
+    /**
+     * generates game data, such as number and salted string (to get hash)
+     * @return {{number: number, salted: string}}
+     */
     getResult(){
         const number = Math.round( this.rangeStart + (this.rangeEnd  - this.rangeStart) * Math.random() ),
             saltLength = 5,
@@ -31,9 +40,21 @@ class MockupServerConnection {
             salt += getRandomSymbol();
         }
 
-        return {number, salt, string: number+salt}
+        return {number, salted: number+salt}
     }
 
+    /**
+     * Get user's bet data and returns all the game data with win/lose result included
+     * @param {Number} number - number, which user bets on
+     * @param {Number} amount - amount of user's bet
+     * @param {String} bet - type of bet, allowed "hi" and "lo"
+     * @return {Promise<{hash: string, win: boolean, winAmount: number, number: number, salted: string}>}
+     *      hash - hash string of salted number
+     *      win - boolean, indicates if the user won
+     *      winAmount - amount, which user won
+     *      number - game result number
+     *      salted - number+salt string
+     */
     endGame( number, amount, bet ){
         const gameResult = this[resultPropName],
             resNumber = gameResult.number,
@@ -55,6 +76,13 @@ class MockupServerConnection {
         });
     }
 
+    /**
+     * gets number, which user bets on, and returns chances for "hi" and "lo" bet types
+     * @param number - number, which user bets on
+     * @return {{hi: {chance: number, payout: number}, lo: {chance: number, payout: number}}}
+     *      chance - chance of win in percents
+     *      payout - multiplier for user's bet's amount in win case
+     */
     getChance(number){
         if( typeof number !== 'number' || number > this.rangeEnd || number < this.rangeStart ){
             throw new Error('Wrong number passed: '+ String(number));

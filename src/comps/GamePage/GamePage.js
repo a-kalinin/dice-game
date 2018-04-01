@@ -25,22 +25,36 @@ class GamePage extends Component {
     }
 
     componentDidMount() {
+        //attach plugin for balance API
         this.balance = new Balance();
         this.balance.get().then( balance => this.setState({balance}) );
 
+        //attach plugin for game API
         this.api = new API();
         this.api.startNewGame().then( hash => this.setState({hash, gameResult: null}) );
     }
 
+    /**
+     * handler for user's bet's number change
+     * @param {Number} number - number, which user bets on
+     */
     handleNumberChange(number){
         const chance = number ? this.api.getChance(number) : null;
         this.setState({number, chance});
     }
 
+    /**
+     * handler for user's bet's amount change
+     * @param {Number} amount - user's bet's amount
+     */
     handleAmountChange(amount){
         this.setState({amount});
     }
 
+    /**
+     * handler for user's free credits request
+     * @param {Event} event - button click event
+     */
     handleCreditsRequest(event){
         event.preventDefault();
         this.balance.getCredit()
@@ -48,6 +62,10 @@ class GamePage extends Component {
             .catch( error => console.log(error) );
     }
 
+    /**
+     * handler for user's bet
+     * @param {String} bet - type of bet, allowed "hi" and "lo"
+     */
     handleBetMake(bet){
         if(!this.state.number || !this.state.amount){
             return;
@@ -63,15 +81,27 @@ class GamePage extends Component {
             }.bind(this))
     }
 
+    /**
+     * Show game results and update balance
+     * @param {Object} results - game results from game API
+     * @param {String} results.hash - hash string of salted number
+     * @param {Boolean} results.win - boolean, indicates if the user won
+     * @param {Number} results.winAmount - amount, which user won
+     * @param {Number} results.number - game result number
+     * @param {String} results.salted - number+salt string
+     */
     showResults(results){
         this.setState({gameResult: results});
         this.balance.add(results.winAmount)
             .then( balance => this.setState({balance}) );
-
     }
 
+    /**
+     * reset data and start new game
+     */
     startNewGame(){
-        this.api.startNewGame().then( hash => this.setState({hash, gameResult: null}) );
+        this.api.startNewGame()
+            .then( hash => this.setState({hash, gameResult: null}) );
     }
 
     render() {
