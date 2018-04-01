@@ -59,7 +59,7 @@ class GamePage extends Component {
         event.preventDefault();
         this.balance.getCredit()
             .then( balance => this.setState({balance}) )
-            .catch( error => console.log(error) );
+            .catch( error => alert(error) );
     }
 
     /**
@@ -79,6 +79,7 @@ class GamePage extends Component {
                     .then(results => this.showResults(results));
 
             }.bind(this))
+            .catch(error => alert(error));
     }
 
     /**
@@ -112,7 +113,7 @@ class GamePage extends Component {
                 <BetSection balance={this.state.balance} number={this.state.number} amount={this.state.amount}
                             chance={this.state.chance} onNumberChange={this.handleNumberChange}
                             onAmountChange={this.handleAmountChange} onBetMake={this.handleBetMake}
-                            disableBetButtons={disableBetButtons} disableAll={!!this.state.gameResult}/>
+                            disableBetButtons={disableBetButtons} disableAll={!!this.state.gameResult || !this.state.balance}/>
                 <GameSection hash={this.state.hash} onRestart={this.startNewGame}
                              win={this.state.gameResult && this.state.gameResult.win}
                              number={this.state.gameResult && this.state.gameResult.number}
