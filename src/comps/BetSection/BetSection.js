@@ -57,19 +57,15 @@ class BetSection extends Component {
         }
 
         return (
-            <div className="BetSection">
+            <section className="BetSection">
                 <form onSubmit={event => event.preventDefault()}>
                     <div className="row">
-                        <div>Bet Amount</div>
-                        <div>
-                            {amountInput}
-                        </div>
+                        <div className="column name">Bet Amount</div>
+                        <div className="column input">{amountInput}</div>
                     </div>
                     <div className="row">
-                        <div>Number</div>
-                        <div>
-                            {numberInput}
-                        </div>
+                        <div className="column name">Number</div>
+                        <div className="column input">{numberInput}</div>
                     </div>
                     <div className="row">
                         <BetButton name="hi" number={this.props.number} chance={this.props.chance && this.props.chance.hi}
@@ -78,7 +74,7 @@ class BetSection extends Component {
                                    onClick={this.handleFormSubmitClick} disabled={this.props.disabled} />
                     </div>
                 </form>
-            </div>
+            </section>
         );
     }
 }

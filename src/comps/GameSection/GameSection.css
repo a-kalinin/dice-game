@@ -1,0 +1,85 @@
+.GameSection{
+    background-color: #f3f3f3;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px 0;
+}
+
+.GameSection:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.GameSection .column{
+    width: 33.3%;
+    float:left;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+    height: 180px;
+}
+.GameSection .column:last-child{
+    border-right: none;
+}
+
+.GameSection textarea{
+    resize: none;
+    height: 60px;
+    width: 130px;
+
+}
+
+.GameSection button{
+    text-transform: capitalize;
+    margin: 20px 10px 10px ;
+    width: 130px;
+    height: 120px;
+    box-sizing: border-box;
+    font-size: 30px;
+    border-radius: 8px;
+    outline: 0;
+}
+
+.GameSection h4{
+    font-size: 15px;
+}
+
+.GameSection .gameResults div{
+    margin: 0 10px;
+    background-color: #fff;
+}
+
+.GameSection .result{
+    font-size: 30px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+.GameSection .result.win:after{
+    content: "WIN";
+    color: #3c0;
+}
+.GameSection .result.lose:after{
+    content: "LOSE";
+    color: #f22;
+}
+
+.GameSection .number{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.GameSection h4{
+    font-size: 15px;
+}
+
+.GameSection .string{
+    text-align: right;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    font-size: 80%;
+    color: #777;
+}
+
+

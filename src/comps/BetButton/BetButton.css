@@ -1,3 +1,25 @@
+.BetButton{
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    line-height: 22px;
+}
+
 .BetButton input{
     text-transform: capitalize;
+    margin: 20px 10px 10px ;
+    width: 200px;
+    height: 80px;
+    box-sizing: border-box;
+    font-size: 30px;
+    border-radius: 8px;
+    outline: 0;
+}
+
+.BetButton:first-child input{
+    background-color: #9d6;
+}
+
+.BetButton:last-child input{
+    background-color: #dc6;
 }

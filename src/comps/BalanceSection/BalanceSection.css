@@ -1,0 +1,41 @@
+.BalanceSection{
+    background-color: #f3f3f3;
+    border: 1px solid #bbb;
+    height: 80px;
+    line-height: 80px;
+    box-sizing: border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: none;
+}
+
+.BalanceSection:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.BalanceSection > div{
+    width: 50%;
+    float: left;
+}
+
+.BalanceSection .balance span{
+    font-size: 150%;
+    Font-weight: bold;
+}
+
+.BalanceSection .button input{
+    border: 1px solid #aaa;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+.BalanceSection .button input:not([disabled]):hover{
+    background-color: #e5e5e5;
+}
+
+
+

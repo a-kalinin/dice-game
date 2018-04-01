@@ -19,14 +19,14 @@ class BalanceSection extends Component {
         }
 
         return (
-            <div className="BalanceSection">
-                <div>
+            <section className="BalanceSection">
+                <div className="balance">
                     Balance: <span className="value">{ this.props.balance }</span> credits
                 </div>
-                <div>
+                <div className="button">
                     {button}
                 </div>
-            </div>
+            </section>
         );
     }
 }

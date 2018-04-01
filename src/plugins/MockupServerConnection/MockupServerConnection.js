@@ -25,7 +25,7 @@ class MockupServerConnection {
             saltLength = 5,
             saltRange = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
             getRandomSymbol = () => saltRange[ Math.round( Math.random()*( saltRange.length-1 ) ) ];
-        let salt = '';
+        let salt = '__';
 
         for(let i = 0; i<saltLength; i++){
             salt += getRandomSymbol();

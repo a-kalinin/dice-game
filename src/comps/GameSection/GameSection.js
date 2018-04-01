@@ -9,21 +9,21 @@ class GameSection extends Component {
 
     render() {
         return (
-            <div className="GameSection">
-                <h4>Game</h4>
+            <section className="GameSection">
                 <div className="column">
-                    <div>Provably Fair Hash</div>
-                    <div>{this.props.hash}</div>
+                    <h4>Provably Fair Hash</h4>
+                    <div><textarea disabled="disabled" value={this.props.hash} /></div>
                 </div>
-                <div className="column">
-                    <div>{this.props.win === true ? 'WIN' : this.props.win === false ? 'LOSE' : null}</div>
-                    <div>{this.props.number}</div>
-                    <div>{this.props.string}</div>
+                <div className="column gameResults">
+                    <h4>Game</h4>
+                    <div className={this.props.win === true ? 'win result' : this.props.win === false ? 'lose result' : 'result'} />
+                    <div className="number">{this.props.number}</div>
+                    <div className="string">{this.props.string}</div>
                 </div>
                 <div className="column">
                     <button onClick={ this.handleClick.bind(this) }>Start New Game</button>
                 </div>
-            </div>
+            </section>
         );
     }
 }
