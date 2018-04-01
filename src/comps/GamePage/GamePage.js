@@ -12,11 +12,13 @@ class GamePage extends Component {
         this.state = {
             hash: '',
             balance: 0,
-            number: null,
+            amount: 0,
+            number: 0,
             chance: null,
             gameResult: null
         };
         this.handleNumberChange = this.handleNumberChange.bind(this);
+        this.handleAmountChange = this.handleAmountChange.bind(this);
         this.handleCreditsRequest = this.handleCreditsRequest.bind(this);
         this.handleBetMake = this.handleBetMake.bind(this);
         this.startNewGame = this.startNewGame.bind(this);
@@ -35,6 +37,10 @@ class GamePage extends Component {
         this.setState({number, chance});
     }
 
+    handleAmountChange(amount){
+        this.setState({amount});
+    }
+
     handleCreditsRequest(event){
         event.preventDefault();
         this.balance.getCredit()
@@ -43,20 +49,21 @@ class GamePage extends Component {
     }
 
     handleBetMake(bet){
-        console.log(bet);
+        if(!this.state.number || !this.state.amount){
+            return;
+        }
         this.setState({gameEnded:true});
-        this.balance.subtract(bet.amount)
+        this.balance.subtract(this.state.amount)
             .then(function(balance){
 
                 this.setState({balance});
-                this.api.endGame(Number(bet.number), bet.amount, bet.value)
+                this.api.endGame(Number(this.state.number), this.state.amount, bet)
                     .then(results => this.showResults(results));
 
             }.bind(this))
     }
 
     showResults(results){
-        console.log(results);
         this.setState({gameResult: results});
         this.balance.add(results.winAmount)
             .then( balance => this.setState({balance}) );
@@ -68,12 +75,14 @@ class GamePage extends Component {
     }
 
     render() {
+        const disableBetButtons = !this.state.number || !this.state.amount;
         return (
             <div className="GamePage">
                 <BalanceSection balance={this.state.balance} onCreditsRequest={this.handleCreditsRequest}/>
-                <BetSection balance={this.state.balance} number={this.state.number}
+                <BetSection balance={this.state.balance} number={this.state.number} amount={this.state.amount}
                             chance={this.state.chance} onNumberChange={this.handleNumberChange}
-                            onBetMake={this.handleBetMake} disabled={!!this.state.gameResult}/>
+                            onAmountChange={this.handleAmountChange} onBetMake={this.handleBetMake}
+                            disableBetButtons={disableBetButtons} disableAll={!!this.state.gameResult}/>
                 <GameSection hash={this.state.hash} onRestart={this.startNewGame}
                              win={this.state.gameResult && this.state.gameResult.win}
                              number={this.state.gameResult && this.state.gameResult.number}

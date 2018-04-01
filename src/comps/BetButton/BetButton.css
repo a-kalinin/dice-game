@@ -23,3 +23,7 @@
 .BetButton:last-child input{
     background-color: #dc6;
 }
+
+.BetButton input:disabled{
+    background-color: #ccc;
+}

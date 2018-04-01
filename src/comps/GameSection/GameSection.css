@@ -18,8 +18,9 @@
     float:left;
     border-right: 1px solid #ddd;
     box-sizing: border-box;
-    height: 180px;
+    height: 160px;
 }
+
 .GameSection .column:last-child{
     border-right: none;
 }
@@ -28,7 +29,6 @@
     resize: none;
     height: 60px;
     width: 130px;
-
 }
 
 .GameSection button{
@@ -44,6 +44,7 @@
 
 .GameSection h4{
     font-size: 15px;
+    margin: 10px 0;
 }
 
 .GameSection .gameResults div{
@@ -55,6 +56,7 @@
     font-size: 30px;
     font-weight: bold;
     padding-top: 10px;
+    height: 34px;
 }
 .GameSection .result.win:after{
     content: "WIN";
@@ -68,6 +70,7 @@
 .GameSection .number{
     font-size: 40px;
     font-weight: bold;
+    height: 45px;
 }
 
 .GameSection h4{
@@ -80,6 +83,7 @@
     padding-bottom: 10px;
     font-size: 80%;
     color: #777;
+    height: 15px;
 }
 
 

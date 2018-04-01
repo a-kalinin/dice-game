@@ -1,7 +1,15 @@
 class MockupServerConnection {
 
     constructor(){
-        this.funds = 0;
+        this.funds = this.funds || 0;
+    }
+
+    get funds(){
+        return Number(localStorage.funds);
+    }
+
+    set funds(funds){
+        localStorage.funds = Math.round(funds*100)/100;
     }
 
     subtract( amount ){
