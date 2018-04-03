@@ -117,7 +117,7 @@ class GamePage extends Component {
                 <GameSection hash={this.state.hash} onRestart={this.startNewGame}
                              win={this.state.gameResult && this.state.gameResult.win}
                              number={this.state.gameResult && this.state.gameResult.number}
-                             string={this.state.gameResult && this.state.gameResult.string} />
+                             salted={this.state.gameResult && this.state.gameResult.salted} />
             </div>
         );
     }

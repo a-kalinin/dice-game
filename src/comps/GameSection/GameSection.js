@@ -18,7 +18,7 @@ class GameSection extends Component {
                     <h4>Game</h4>
                     <div className={this.props.win === true ? 'win result' : this.props.win === false ? 'lose result' : 'result'} />
                     <div className="number">{this.props.number}</div>
-                    <div className="string">{this.props.string}</div>
+                    <div className="string">{this.props.salted}</div>
                 </div>
                 <div className="column">
                     <button onClick={ this.handleClick.bind(this) }>Start New Game</button>
